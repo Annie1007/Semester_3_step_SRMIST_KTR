@@ -1,0 +1,31 @@
+public class ReviewLengthProfiler {
+
+    public static void classifyWordLengths(String review) {
+        // Split by one or more whitespace characters
+        String[] words = review.trim().split("\\s+");
+
+        int shortCount = 0;
+        int mediumCount = 0;
+        int longCount = 0;
+
+        for (String word : words) {
+            // Strip punctuation marks for accurate letter count
+            String cleanWord = word.replaceAll("[^a-zA-Z0-9]", "");
+            int length = cleanWord.length();
+
+            if (length >= 1 && length <= 4) {
+                shortCount++;
+            } else if (length >= 5 && length <= 8) {
+                mediumCount++;
+            } else if (length >= 9) {
+                longCount++;
+            }
+        }
+
+        System.out.printf("Short: %d | Medium: %d | Long: %d%n", shortCount, mediumCount, longCount);
+    }
+
+    public static void main(String[] args) {
+        classifyWordLengths("This movie was absolutely fantastic and thrilling");
+    }
+}
